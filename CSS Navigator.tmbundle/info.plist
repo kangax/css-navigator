@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>deleted</key>
+	<array>
+		<string>D22B2506-C090-4DDF-8209-1A1867EC590D</string>
+		<string>833083C6-14E9-466A-94DF-94F6EC983CC4</string>
+		<string>59DD61A4-B994-4506-ACA0-91D8E48CF363</string>
+	</array>
+	<key>mainMenu</key>
+	<dict>
+		<key>items</key>
+		<array>
+			<string>59DD61A4-B994-4506-ACA0-91D8E48CF363</string>
+			<string>833083C6-14E9-466A-94DF-94F6EC983CC4</string>
+			<string>D22B2506-C090-4DDF-8209-1A1867EC590D</string>
+		</array>
+		<key>submenus</key>
+		<dict/>
+	</dict>
+	<key>name</key>
+	<string>CSS Navigator</string>
+	<key>ordering</key>
+	<array>
+		<string>5A0697B6-54CF-4129-BF9D-30BDC1F99B1E</string>
+		<string>762BB989-7F83-4729-B9DB-3F946FF0EC69</string>
+		<string>52E3C599-8AEE-4075-8E5A-96D4959BB25C</string>
+	</array>
+	<key>uuid</key>
+	<string>922AC4FA-A0F7-4A84-9EA4-62AF24384771</string>
+</dict>
+</plist>

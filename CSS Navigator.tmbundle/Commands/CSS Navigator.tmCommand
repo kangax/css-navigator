@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveActiveFile</string>
+	<key>command</key>
+	<string>#!/usr/bin/php
+&lt;?php 
+error_reporting(E_ERROR);
+if (!isset($_ENV['TM_FILEPATH'])) die ('&lt;center&gt;&lt;p&gt;Please save the file first.&lt;p&gt;Sorry for the unconvenience - we\'re working on it.');
+?&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;CSS Navigator&lt;/title&gt;
+	&lt;style&gt;
+		body {font-family: "Lucida Grande"; font-size:13px; padding:0; margin:0;}
+		h1 {font-size:16px; padding:10px 0; line-height:20px; border-bottom:1px solid #ccc; margin-bottom:1em; color:#000; font-size:13px; display:block; text-align:center; font-weight:bold; background:#eee}
+		h1 strong {font-weight:normal;}
+		h1 strong:after {content:'►';  font-size:10px; margin:0 7px}
+		a {display:block; margin:0 5px; text-decoration:none; padding:3px 7px; border:1px solid #fff; border-radius:12px}
+		a.level-0 {font-weight:bold; font-size:14px;}
+		a:hover, a:focus {background:#eee; border-color:#ccc;}
+		a.group {color:#333}
+		a.todo {color:crimson; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+		.line_number {color:#bbb; font-size:11px; margin-right:5px; font-weight:normal !important; display:inline-block; width:30px; text-align:right}
+		.current_line_marker {border-bottom:2px dotted #eee; margin:7px 0; position:relative;}
+		.current_line_marker span {position:absolute; right:5px; top:-6px; text-transform:uppercase; font-size:9px; color:#999; background-color:#fff; /* border:1px solid #eee; */ padding:1px 3px; border-radius:4px}
+		.level-1 span {margin-right:30px}
+		.level-2 span {margin-right:60px}
+		.level-3 span {margin-right:60px}
+		.level-4 span {margin-right:75px}
+		.level-5 span {margin-right:90px}
+		.level-6 span {margin-right:105px}
+		.level-7 span {margin-right:120px}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	&lt;h1&gt;&lt;?php
+
+if ($_ENV['TM_PROJECT_FILEPATH'])
+	echo '&lt;strong&gt;'.str_replace('.tmproj', '', array_pop(explode('/', $_ENV['TM_PROJECT_FILEPATH']))).'&lt;/strong&gt;';
+
+echo array_pop(explode('/', $_ENV['TM_FILEPATH'])) ?&gt;&lt;/h1&gt;
+
+
+&lt;?php
+$file = explode("\n", file_get_contents($_ENV['TM_FILEPATH']));
+$nesting = 0;
+$i = 0; // line number
+$result = false;
+$current_line_marked = false;
+$html_current_line_marker = '&lt;div class="current_line_marker"&gt;&lt;span&gt;here you are&lt;/span&gt;&lt;/div&gt;';
+
+foreach ($file as $line) {
+	$i++;
+	
+	if (!$current_line_marked AND $i &gt; $_ENV['TM_LINE_NUMBER']) {
+		echo $html_current_line_marker;
+		$current_line_marked = true;
+	}
+
+	if (false !== strpos($line, '@group')) {
+		//$ind = str_repeat ('&amp;emsp;', $nesting);
+		$group = trim(preg_replace('/(\/\*)? *@group *([^\*]*).*(\*\/)?/', '$2', $line));
+		echo '&lt;a href="txmt://open/?url=file://'.$_ENV['TM_FILEPATH'].'&amp;line='.$i.'" class="group level-'.$nesting.'" tabindex="2"&gt;&lt;span class="line_number"&gt;'.$i.'&lt;/span&gt; '.$ind.$group.'&lt;/a&gt;';
+		
+		$nesting ++;
+
+	}
+
+	if (false !== strpos($line, '@todo')) {
+		//$ind = str_repeat ('&amp;emsp;', $nesting);
+		$todo = trim(preg_replace('/[^\/]*(\/\*)? *@todo *([^\*]*).*(\*\/)?/', '$2', $line));
+		if (empty($todo)) $todo = '(to do)';
+		echo '&lt;a href="txmt://open/?url=file://'.$_ENV['TM_FILEPATH'].'&amp;line='.$i.'" class="todo level-'.$nesting.'" tabindex="2"&gt;&lt;span class="line_number"&gt;'.$i.'&lt;/span&gt; '.$ind.$todo.'&lt;/a&gt;';
+	}
+
+
+	if (false !== strpos($line, '@end')) {
+		$nesting--;
+	}
+
+
+}
+
+if (!$current_line_marked) 
+	echo $html_current_line_marker;
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
+	<key>input</key>
+	<string>document</string>
+	<key>keyEquivalent</key>
+	<string>@d</string>
+	<key>name</key>
+	<string>CSS Navigator</string>
+	<key>output</key>
+	<string>showAsHTML</string>
+	<key>scope</key>
+	<string>source.css, string.quoted</string>
+	<key>uuid</key>
+	<string>5A0697B6-54CF-4129-BF9D-30BDC1F99B1E</string>
+</dict>
+</plist>
