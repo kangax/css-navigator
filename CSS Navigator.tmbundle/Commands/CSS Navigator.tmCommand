@@ -100,7 +100,7 @@ if (!$current_line_marked)
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>
-	<string>source.css, string.quoted</string>
+	<string>source.css, source.sass, string.quoted</string>
 	<key>uuid</key>
 	<string>5A0697B6-54CF-4129-BF9D-30BDC1F99B1E</string>
 </dict>

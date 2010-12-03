@@ -13,7 +13,7 @@ $2$TM_SELECTED_TEXT$3
 	<key>name</key>
 	<string>@group</string>
 	<key>scope</key>
-	<string>source.css</string>
+	<string>source.css, source.sass</string>
 	<key>tabTrigger</key>
 	<string>///</string>
 	<key>uuid</key>
