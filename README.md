@@ -1,0 +1,1 @@
+This is an unofficially hosted CSS Navigator Textmate bundle, modified to work in context of Sass files.
